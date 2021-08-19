@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_132437) do
   enable_extension "plpgsql"
 
   create_table "patient_labs", force: :cascade do |t|
+    t.bigint "patient_id", null: false
     t.string "code"
     t.string "name"
     t.string "value"
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_132437) do
     t.string "result_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_patient_labs_on_patient_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -39,4 +41,5 @@ ActiveRecord::Schema.define(version: 2021_08_18_132437) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "patient_labs", "patients"
 end

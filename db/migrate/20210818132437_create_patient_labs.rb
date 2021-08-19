@@ -1,6 +1,7 @@
 class CreatePatientLabs < ActiveRecord::Migration[6.0]
   def change
     create_table :patient_labs do |t|
+      t.references :patient, null: false, foreign_key: true
       t.string :code
       t.string :name
       t.string :value
