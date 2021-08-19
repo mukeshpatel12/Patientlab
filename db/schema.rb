@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2021_08_18_132437) do
     t.string "ref_range"
     t.string "finding"
     t.string "result_state"
+    t.string "date_of_test"
+    t.string "lab_number"
+    t.string "clinic_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["patient_id"], name: "index_patient_labs_on_patient_id"
@@ -34,8 +37,6 @@ ActiveRecord::Schema.define(version: 2021_08_18_132437) do
     t.string "patient_name"
     t.string "gender"
     t.integer "date_of_birth"
-    t.string "first_name"
-    t.string "last_name"
     t.string "phone_mobile"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

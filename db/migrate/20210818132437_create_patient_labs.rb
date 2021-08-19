@@ -9,6 +9,9 @@ class CreatePatientLabs < ActiveRecord::Migration[6.0]
       t.string :ref_range
       t.string :finding
       t.string :result_state
+      t.string :date_of_test
+      t.string :lab_number
+      t.string :clinic_code
 
       t.timestamps
     end

@@ -1,56 +1,51 @@
 class CreatePatientLabService
 
-	def get_record(data)
-		response_hash = eval(data)
+    def call(data)
+        patient_report = eval(data)
 
-		patient = patient_create_with_response_first(response_hash)
-		create_patient_lab(patient, response_hash)
-	end
+        patient = create_patient(patient_report)
+        create_patient_lab(patient, patient_report) unless patient.nil?
+    end
 
-	def patient_create_with_response_first(response_hash)
-		fetch_response = patient_data(response_hash)
+    def create_patient(patient_report)
+        patient_params = set_patient_data(patient_report)
 
-		Patient.create!(
-			fetch_response
-        )
-	end
+        Patient.create!(patient_params)
+    end
 
-	def create_patient_lab(patient, response_hash)
-		if !patient.nil?
+    def create_patient_lab(patient, patient_report)
+        params = patient_report[:lab_studies]
 
-			params = response_hash[:lab_studies][0]
-
+        params.each do |lab|
             patient.patient_labs.create!(
-            code: params[:code],
-            name: params[:name],
-            value: params[:vallue],
-            unit: params[:unit],
-            ref_range: params[:ref_range],
-            finding: params[:finding],
-            result_state: params[:result_state]
+            code: lab[:code],
+            name: lab[:name],
+            value: lab[:vallue],
+            unit: lab[:unit],
+            ref_range: lab[:ref_range],
+            finding: lab[:finding],
+            result_state: lab[:result_state]
           )
         end
-	end
+    end
 
-	private
+    private
 
-	def patient_data(response_hash)
-		params 	= response_hash
-		if params[:patient_name].present?
-			id_number 		= params[:id_number],
-            patient_name 	= params[:patient_name],
-            gender 			= params[:gender],
-            date_of_birth 	= params[:date_of_birth]
-		else
-			second_case_params 		= params[:patient_data]
-			id_number 				= second_case_params[:id_number],
-            first_name 				= second_case_params[:first_name],
-            last_name 				= second_case_params[:last_name],
-            phone_mobile 			= second_case_params[:phone_mobile],
-            gender 					= second_case_params[:gender],
-            date_of_birth 			= second_case_params[:date_of_birth]
-		end
+    def set_patient_data(params)
+        if params[:patient_name].present?
+            id_number       = params[:id_number]
+            patient_name    = params[:patient_name]
+            gender          = params[:gender]
+            date_of_birth   = params[:date_of_birth]
+        else
+            data            = params[:patient_data]
+            id_number       = data[:id_number]
+            patient_name    = data[:first_name] + " " + data[:last_name]
+            phone_mobile    = data[:phone_mobile]
+            gender          = data[:gender]
+            date_of_birth   = data[:date_of_birth]
+        end
 
-		{ id_number: id_number, patient_name: patient_name, gender: gender, date_of_birth: date_of_birth, first_name: first_name, last_name: last_name, phone_mobile: phone_mobile }
-	end
+        { id_number: id_number, patient_name: patient_name, gender: gender, date_of_birth: date_of_birth, phone_mobile: phone_mobile }
+    end
 end
