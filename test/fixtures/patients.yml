@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_number: 342525
+  patient_name: Stephen
+  gender: M
+  date_of_birth: 01-01-1990
+  first_name: Stephen
+  last_name: Jeorge
+  phone_mobile: 123445667
+
