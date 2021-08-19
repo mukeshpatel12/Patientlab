@@ -1,2 +1,34 @@
 <%= link_to "Get record from 1st lab", patients_path(case1: "case1"), method: :post %><br>
 <%= link_to "Get record from 2nd lab", patients_path(case2: "case2"), method: :post %>
+
+<h1>All Patients</h1>
+ 
+<div class="container">
+  <div class="row">
+  <% @patients.each do |patient| %>
+    <div class="col-sm-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+        <h5>Patient Details</h5>
+         <p>ID: <%= patient.id_number %></p>
+         <p>Name: <%= patient.patient_name %> </p>
+         <p>Gender: <%= patient.gender %></p>
+        </div>
+        <div class="card-body">
+          <h5>Patient Lab</h5>
+        <% patient.patient_labs.each do |patient_lab| %>
+          <p>Code: <%= patient_lab.code %></p>
+          <p>Lab: <%= patient_lab.name %></p>
+          <p>Unit: <%= patient_lab.unit %></p>
+          <p>Ref Range: <%= patient_lab.ref_range %></p>
+          <p>Finding: <%= patient_lab.finding %></p>
+          <p>Result State: <%= patient_lab.result_state %></p>
+          <p>Lab Number: <%= patient_lab.lab_number %></p>
+          <p>Clinic code: <%= patient_lab.clinic_code %></p>
+          <p>Date of test: <%= patient_lab.date_of_test %></p>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

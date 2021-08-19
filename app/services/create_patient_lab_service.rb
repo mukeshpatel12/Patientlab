@@ -24,7 +24,10 @@ class CreatePatientLabService
             unit: lab[:unit],
             ref_range: lab[:ref_range],
             finding: lab[:finding],
-            result_state: lab[:result_state]
+            result_state: lab[:result_state],
+            lab_number: patient_report[:lab_number],
+            clinic_code: patient_report[:clinic_code],
+            date_of_test: patient_report[:date_of_test]
           )
         end
     end
