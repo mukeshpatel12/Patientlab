@@ -1,0 +1,20 @@
+{
+	"date_of_test":"20210227134300",
+	"id_number":"IC000A2",
+	"patient_name":"Patient A4",
+	"gender":"F",
+	"date_of_birth":"19940231",
+	"lab_number":"QT196-21-124",
+	"clinic_code":"QT196",
+	"lab_studies":[
+		{
+		"code":"2085-9",
+		"name":"HDL Cholesterol",
+		"value":"cancel",
+		"unit":"mg/dL",
+		"ref_range":"> 59",
+		"finding":"A",
+		"result_state":"F"
+		}
+	],
+}
